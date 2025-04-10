@@ -6,9 +6,11 @@
     <title>Registration</title>
 </head>
 <body style="background-color: aquamarine;">
-    <form action="/submit" method="POST">
+    <form action="/api/users" method="POST">
         <label>Name:</label>
         <input type="text" name="name" required />
+        <br /><br />
+        <input type="text" name="username" required />
         <br /><br />
         <label>Email:</label>
         <input type="email" name="email" required />

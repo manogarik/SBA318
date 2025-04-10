@@ -14,8 +14,8 @@ router
         type: "GET",
       },
     ];
-
-    res.json({ users});
+    res.render('users',{users});
+    //res.json({ users});
   })
   .post((req, res, next) => {
     if (req.body.name && req.body.username && req.body.email) {
