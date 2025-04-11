@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const posts = require("../data/posts");
+const comments = require("../data/comments");
 const error = require("../utilities/error");
 
 
@@ -89,4 +90,27 @@ router
   else next();
 })
 
+//Retrieves all comments made on the post with the specified id.
+router
+.route("/:id/comments")
+.get((req,res,next) => 
+{
+    const {userId} = req.query;
+    if(userId)
+    {
+        const comment = comments.filter((c)=> (c.postId == req.params.id ) && (c.userId == userId))
+        if(comment)
+            res.json(comment);
+        else
+            next();
+    }
+    else
+    {
+        const comment = comments.filter((c)=> (c.postId == req.params.id ) && (c.userId == userId))
+        if(comment)
+            res.json(comment);
+        else
+            next();
+    }
+})
 module.exports = router;

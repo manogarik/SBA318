@@ -3,6 +3,7 @@ const router = express.Router();
 
 const users = require("../data/users");
 const error = require("../utilities/error");
+const comments = require("../data/comments");
 
 router
   .route("/")
@@ -80,5 +81,31 @@ router
     if (user) res.json(user);
     else next();
   });
+
+//Retrieves comments made by the user with the specified id.
+router
+.route("/:id/comments")
+.get((req,res,next) =>
+{  
+    //Retrieves comments made by the user with the specified id on the post with the specified postId.
+    const {postId} = req.query;
+    if(postId)
+    {
+        const comment = comments.filter((c)=> ((c.userId == req.params.id) && (c.postId == postId)))
+        if(comment)
+            res.json(comment);
+        else
+            next();
+    }
+    else{
+        const comment = comments.filter((c)=> (c.userId == req.params.id))
+        if(comment)
+            res.json(comment);
+        else
+            next();
+    }
+
+})
+
 
 module.exports = router;
