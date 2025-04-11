@@ -7,41 +7,47 @@ const express = require("express");
 // accept data from the client (POST, PATCH).
 const bodyParser = require("body-parser");
 
+
 const users = require("./routes/users");
 const posts = require("./routes/posts");
-const comments = require("./routes/comments")
+const comments = require("./routes/comments");
+const path = require('path');
 
 const app = express();
 const port = 3000;
 
 // We use the body-parser middleware FIRST so that
 // we have access to the parsed data within our routes.
-// The parsed data will be located in "req.body".
+// Create and use at least two pieces of custom middleware.
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+//Create and render at least one view using a view template and template engine. This can be a custom template engine or a third-party engine.
 
 app.set('view engine','ejs');
 
 app.get('/',(req,res) =>
     {
-        res.render('welcome',({title : 'WELCOME PAGE'}));
+        res.render('welcome',({title : 'EJS'}));
     })
     
     app.get('/register',(req,res)=>
     {
         res.render('register');
     })
-    //post method to post data
-    app.post('/submit',(req,res)=>
-    {
-        const { name, email } = req.body;
-        res.send(`Hi! ${name} ! You are successfully registered`);
-    })
+    
+    
+
+//Use at least three different data categories (e.g., users, posts, or comments).
 
 app.use("/api/users", users);
 app.use("/api/posts",posts);
 app.use("/api/comments", comments);
 
+//Create and use error-handling middleware.
 app.use((req, res) => {
     res.status(404);
      res.json({ error: "Resource Not Found" });

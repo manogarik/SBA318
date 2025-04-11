@@ -14,6 +14,7 @@ router
   .get((req, res) => {
    const {userId} = req.query;
    const post = posts.filter((p)=> p.userId == userId);
+   //Include query parameters for data filtering, where appropriate. At least one data category should allow for additional filtering through the use of query parameters.
    //This route uses a "userId" query parameter to filter posts, while the one above uses a route parameter.
    if(userId)
    {
@@ -78,6 +79,8 @@ router
   });
 
 //Retrieves all posts by a user with the specified id.
+//Utilize route parameters, where appropriate.
+
 router
 .route("/api/users/:id/posts") 
 .get((req, res, next) => {

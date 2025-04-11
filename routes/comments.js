@@ -6,6 +6,8 @@ const error = require("../utilities/error");
 
 router
 .route("/")
+//Create GET routes for all data that should be exposed to the client.
+
 .get((req,res,next)=>
 {
   const {userId,postId} = req.query;
@@ -33,6 +35,9 @@ router
   else
     res.json(comments);
 })
+
+//Create POST routes for data, as appropriate. At least one data category should allow for client creation via a POST request.
+
 .post((req, res) => {
   // Within the POST request route, we create a new
   // user with the data given by the client.
@@ -64,6 +69,7 @@ router
     next();
 })
 //Used to update a comment with the specified id with a new body.
+//Create PATCH or PUT routes for data, as appropriate. At least one data category should allow for client manipulation via a PATCH or PUT request.
 .patch((req,res,next)=>
 {
   const comment = comments.find((c,i)=>
@@ -85,6 +91,8 @@ router
 })
 
 //Used to delete a comment with the specified id.
+//Create DELETE routes for data, as appropriate. At least one data category should allow for client deletion via a DELETE request.
+
 .delete((req,res,next)=>
 {
   const comment = comments.find((c,i)=>
