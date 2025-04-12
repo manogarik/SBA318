@@ -1,35 +1,35 @@
-const comments=[
+const locations=[
     {
         id:1,
         userId:1,
         postId:1,
-        body: "This is a newly added comment",
+        place: "North Carolina",
     },
     {
         id:2,
         userId:2,
         postId:1,
-        body: "Align paragraphs to the left",
+        place: "Georgia",
     },
     {
         id:3,
         userId:2,
         postId:2,
-        body: "Give all the headings in bold",
+        place: "Atlanta",
     },
     {
         id:4,
         userId:3,
         postId:1,
-        body: "Include a form to register all details of the user",
+        place: "California",
 
     },
     {
         id:5,
         userId:2,
         postId:3,
-        body: "Create dropdowns wherever necessary",
+        body: "Texas",
     }
 
 ];
-module.exports = comments;
+module.exports = locations;

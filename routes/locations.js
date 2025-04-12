@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const comments = require("../data/comments");
+const locations = require("../data/locations");
 const error = require("../utilities/error");
 
 router
@@ -14,7 +14,7 @@ router
   //Retrieves comments by the user with the specified userId.
   if(userId)
   {
-    const comment = comments.find((c)=> c.userId == userId);
+    const comment = locations.find((c)=> c.userId == userId);
     if(comment)
       res.json(comment)
     else
@@ -25,7 +25,7 @@ router
   //Retrieves comments made on the post with the specified postId.
   else if(postId)
   {
-    const comment = comments.find((c)=> c.postId == postId);
+    const comment = locations.find((c)=> c.postId == postId);
     if(comment)
       res.json(comment)
     else
@@ -33,7 +33,7 @@ router
     
   }
   else
-    res.json(comments);
+    res.json(locations);
 })
 
 //Create POST routes for data, as appropriate. At least one data category should allow for client creation via a POST request.
@@ -46,14 +46,14 @@ router
   if (req.body.userId && req.body.postId && req.body.body) {
     
     const comment = {
-      id: comments[comments.length - 1].id + 1,
+      id: locations[locations.length - 1].id + 1,
       userId: req.body.userId,
       postId: req.body.postId,
-      body: req.body.body,
+      place: req.body.place,
     };
 
-    comments.push(comment);
-    res.json(comments[comments.length - 1]);
+    locations.push(comment);
+    res.json(locations[locations.length - 1]);
   } else res.json({ error: "Insufficient Data" });
 });
 
@@ -62,7 +62,7 @@ router
 .route("/:id")
 .get((req,res,next)=>
 {
-  const comment = comments.find((c)=> c.id == req.params.id)
+  const comment = locations.find((c)=> c.id == req.params.id)
   if(comment)
     res.json(comment)
   else
@@ -72,13 +72,13 @@ router
 //Create PATCH or PUT routes for data, as appropriate. At least one data category should allow for client manipulation via a PATCH or PUT request.
 .patch((req,res,next)=>
 {
-  const comment = comments.find((c,i)=>
+  const comment = locations.find((c,i)=>
   {
     if(c.id == req.params.id)
     {
       for(const key in req.body)
       {
-        comments[i][key] = req.body[key]
+        locations[i][key] = req.body[key]
       }
       return true;
     }
@@ -95,11 +95,11 @@ router
 
 .delete((req,res,next)=>
 {
-  const comment = comments.find((c,i)=>
+  const comment = locations.find((c,i)=>
   {
     if(c.id == req.params.id)
     {
-      comments.splice(i,1);
+      locations.splice(i,1);
       return true;
     }
     

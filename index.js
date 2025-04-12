@@ -10,7 +10,7 @@ const bodyParser = require("body-parser");
 
 const users = require("./routes/users");
 const posts = require("./routes/posts");
-const comments = require("./routes/comments");
+const locations = require("./routes/locations");
 const path = require('path');
 
 const app = express();
@@ -45,7 +45,7 @@ app.get('/',(req,res) =>
 
 app.use("/api/users", users);
 app.use("/api/posts",posts);
-app.use("/api/comments", comments);
+app.use("/api/locations", locations);
 
 //Create and use error-handling middleware.
 app.use((req, res) => {
