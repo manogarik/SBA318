@@ -31,10 +31,11 @@ router
   .post((req, res) => {
     // Within the POST request route, we create a new
     // post with the data given by the client.
-    if (req.body.userId && req.body.title && req.body.content) {
+    if (req.body.userId && req.body.locId && req.body.title && req.body.content) {
       const post = {
         id: posts[posts.length - 1].id + 1,
         userId: req.body.userId,
+        locId: req.body.locId,
         title: req.body.title,
         content: req.body.content,
       };
