@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 
 
 const users = require("./routes/users");
-const posts = require("./routes/posts");
+const posts = require("./routes/news");
 const locations = require("./routes/locations");
 const path = require('path');
 
@@ -31,7 +31,7 @@ app.set('view engine','ejs');
 
 app.get('/',(req,res) =>
     {
-        res.render('welcome',({title : 'View Engine'}));
+        res.render('welcome',({title : 'Top News'}));
     })
     
     app.get('/register',(req,res)=>
